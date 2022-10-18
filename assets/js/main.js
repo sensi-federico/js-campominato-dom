@@ -11,29 +11,29 @@ const containerEl = document.querySelector('.my-container');
 const button = document.querySelector('.btn');
 const bombs = [];
 const bannerEl = document.querySelector('.banner');
+let points = 0;
 
-function start () {
-    
+function start() {
+
     containerEl.innerHTML = '';
-    let points = 0;
     const level = document.querySelector('.selector').value;
     // console.log(level);
-    if (level == 1) {
-        for (let i = 1; i <= 100; i++) {
+    if (level == 100) {
+        for (let i = 1; i <= level; i++) {
             const markUp = `<div class="cell lvl_1" src="" alt="">${i}</div>`
             containerEl.insertAdjacentHTML('beforeend', markUp);
         }
         generateBomb(100);
         console.log(bombs);
-    } else if (level == 2){
-        for (let i = 1; i <= 81; i++) {
+    } else if (level == 81) {
+        for (let i = 1; i <= level; i++) {
             const markUp = `<div class="cell lvl_2" src="" alt="">${i}</div>`
             containerEl.insertAdjacentHTML('beforeend', markUp);
         }
         generateBomb(81);
         console.log(bombs);
-    } else if (level == 3){
-        for (let i = 1; i <= 49; i++) {
+    } else if (level == 49) {
+        for (let i = 1; i <= level; i++) {
             const markUp = `<div class="cell lvl_3" src="" alt="">${i}</div>`
             containerEl.insertAdjacentHTML('beforeend', markUp);
         }
@@ -41,46 +41,66 @@ function start () {
         console.log(bombs);
     }
 
-
     const cells = document.querySelectorAll('.cell');
+    pointCheck(cells);
+
+    const userPointsValue = document.querySelector('.userPoints').value;
+    console.log(userPointsValue)
+    const endgame = document.querySelector('#endgame');
+    const victory = Number(level) - 16;
+
+    if (userPointsValue == victory){
+        endgame.append(`Hai Vinto!`);
+    }else {
+        endgame.append(`Hai perso!`);
+    }
+}
+
+function pointCheck(cells) {
     for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
-        const cellNum = cell.innerText;
-        cell.addEventListener('click', function(){
 
-            cell.classList.toggle('bg');
-            console.log(cellNum);
+        cell.addEventListener('click', function () {
+            const cellNum = cell.innerText;
+            cell.classList.add('bg');
+            // console.log(cellNum);
+
+            bombCheck(bombs, cell, cellNum);
+
             points += 1;
-            
-            if (bombs.includes(Number(cellNum))){
-                cell.classList.toggle('bg-bomb');
-                bannerEl.style.display = 'block';
-                containerEl.style.display = 'none';
-            }
-            
+
+            const userPoints = document.querySelector('.userPoints');
+            userPoints.innerHTML = `Punteggio: ${points - 1}`;
+
         })
-    }  
-    
-    const endgame = document.querySelector('#endgame');
-    endgame.append('Hai perso! punteggio: ' + points);
-} 
+    }
+}
 
+function bombCheck(bombs, cell, cellNum) {
+    for (let i = 0; i < bombs.length; i++) {
+        const bomb = bombs[i];
 
-function reload () {
+        if (bomb == cellNum) {
+            cell.classList.add('bg-bomb');
+            bannerEl.style.display = 'block';
+            containerEl.style.display = 'none';
+        }
+    }
+}
+
+function reload() {
     location.reload();
 }
 
-
-function generateBomb (max) {
-    while (bombs.length != 16){
+function generateBomb(max) {
+    while (bombs.length != 16) {
         const bomb = generateRandomNumber(1, max);
-        if (!bombs.includes(bomb)){
+        if (!bombs.includes(bomb)) {
             bombs.push(bomb);
         }
     }
-    // console.log(bombs);
+    return bombs
 }
-
 
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
