@@ -10,6 +10,7 @@
 const containerEl = document.querySelector('.my-container');
 const button = document.querySelector('.btn');
 const bombs = [];
+const bannerEl = document.querySelector('.banner');
 
 function start () {
     
@@ -43,17 +44,18 @@ function start () {
     
     for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
+        const cellNum = cell.innerText;
         cell.addEventListener('click', function(){
-            if (bombs.includes(cell)){
+            if (bombs.includes(Number(cellNum))){
                 cell.classList.toggle('bg-bomb');
+                bannerEl.style.display = 'block';
             }else {
                 cell.classList.toggle('bg');
-                const cellNum = cell.innerHTML;
                 console.log(cellNum);
             }
         })
-    }   
-}
+    }  
+} 
 
 
 function reload () {

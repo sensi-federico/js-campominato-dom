@@ -41,3 +41,15 @@
     padding: 0.5rem;
 }
 
+.banner {
+    background-color: chocolate;
+    height: 300px;
+    top: 200px;
+    width: 100%;
+    position: fixed;
+    display: none;
+}
+
+h1 {
+    margin-top: 6rem;
+}
