@@ -54,7 +54,7 @@ function reload () {
 const bombs = [];
 
 function generateBomb () {
-    while (bombs.lenght != 16){
+    while (bombs.length != 16){
         const bomb = generateRandomNumber(1, 100);
         if (!bombs.includes(bomb)){
             bombs.push(bomb);
@@ -68,3 +68,5 @@ function generateBomb () {
 function generateRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+generateBomb()
