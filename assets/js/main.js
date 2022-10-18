@@ -14,6 +14,8 @@ const bannerEl = document.querySelector('.banner');
 
 function start () {
     
+    containerEl.innerHTML = '';
+    let points = 0;
     const level = document.querySelector('.selector').value;
     // console.log(level);
     if (level == 1) {
@@ -41,20 +43,26 @@ function start () {
 
 
     const cells = document.querySelectorAll('.cell');
-    
     for (let i = 0; i < cells.length; i++) {
         const cell = cells[i];
         const cellNum = cell.innerText;
         cell.addEventListener('click', function(){
+
+            cell.classList.toggle('bg');
+            console.log(cellNum);
+            points += 1;
+            
             if (bombs.includes(Number(cellNum))){
                 cell.classList.toggle('bg-bomb');
                 bannerEl.style.display = 'block';
-            }else {
-                cell.classList.toggle('bg');
-                console.log(cellNum);
+                containerEl.style.display = 'none';
             }
+            
         })
     }  
+    
+    const endgame = document.querySelector('#endgame');
+    endgame.append('Hai perso! punteggio: ' + points);
 } 
 
 
