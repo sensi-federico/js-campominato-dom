@@ -1,0 +1,39 @@
+.my-container {
+    max-width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.cell {
+    border: 1px solid black;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+.bg {
+    background-color: aqua;
+}
+
+.lvl_1 {
+    width: calc(100% / 10);
+}
+
+.lvl_2 {
+    width: calc(100% / 9);
+}
+
+.lvl_3 {
+    width: calc(100% / 7);
+}
+
+.selector {
+    padding: 0.5rem;
+}
+
