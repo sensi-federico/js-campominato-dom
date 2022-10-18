@@ -21,6 +21,10 @@
     background-color: aqua;
 }
 
+.bg-bomb {
+    background-color: brown;
+}
+
 .lvl_1 {
     width: calc(100% / 10);
 }
